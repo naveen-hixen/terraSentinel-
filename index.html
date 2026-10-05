@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAUSAM Personal V3</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#16233a;--mut:#5f6f86;--line:#dbe3ee;--imd:#0b3a82;--imd2:#1e63c8;--sf:#f28c1e;--red:#c62828;--redbg:#fdecea;--ok:#1b8a4b;--shell:#cfd8e6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1626;--card:#16223a;--ink:#e8eef9;--mut:#9aabc6;--line:#27375a;--redbg:#3a1a1c;--shell:#05080f}}
+:root[data-theme="dark"]{--bg:#0e1626;--card:#16223a;--ink:#e8eef9;--mut:#9aabc6;--line:#27375a;--redbg:#3a1a1c;--shell:#05080f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--shell);font-family:Roboto,"Segoe UI",system-ui,sans-serif;color:var(--ink);display:flex;align-items:center;justify-content:center}
+#phone{width:100%;max-width:400px;height:100%;max-height:860px;background:var(--bg);position:relative;overflow:hidden;display:flex;flex-direction:column}
+@media(min-width:520px){#phone{border-radius:34px;border:8px solid #0a0f1a;height:min(860px,96%)}}
+.bar{background:var(--imd);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.bar b{font-size:19px;letter-spacing:.5px}.bar small{display:block;font-size:10.5px;opacity:.8;margin-top:-1px}
+.logo{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.sp{flex:1}.ib{background:rgba(255,255,255,.14);border:0;color:#fff;border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer}
+.ib:focus-visible,button:focus-visible{outline:3px solid var(--sf);outline-offset:2px}
+#scroll{flex:1;overflow-y:auto;padding-bottom:12px}
+.stripe{height:4px;background:linear-gradient(90deg,#f28c1e 33%,#fff 33% 66%,#138808 66%)}
+.banner{margin:10px 12px 0;padding:9px 12px;border-radius:10px;font-size:12.5px;display:flex;gap:8px;align-items:center}
+.off{background:#fff3d6;color:#6b4a00}.warn{background:var(--redbg);color:var(--red);font-weight:600;border:1px solid var(--red);cursor:pointer;text-align:left;width:calc(100% - 24px);font:inherit;font-size:13px;font-weight:600}
+.hero{margin:10px 12px;border-radius:16px;padding:16px;color:#fff;background:linear-gradient(160deg,#0b3a82,#2a7be0 70%,#59a6f0)}
+.hero .t{display:flex;align-items:flex-start;justify-content:space-between}
+.hero h1{font-size:54px;font-weight:300;line-height:1}.hero p{font-size:13px;opacity:.92;margin-top:4px}
+.hero .loc{font-size:13px;font-weight:600}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px;font-size:11px;text-align:center}
+.row4 span{background:rgba(255,255,255,.16);border-radius:10px;padding:7px 2px}.row4 b{display:block;font-size:14px}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:4px 12px 8px;scrollbar-width:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:20px;padding:7px 13px;font-size:12.5px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--imd);color:#fff;border-color:var(--imd)}
+h2{font-size:13px;color:var(--mut);font-weight:600;margin:6px 14px}
+.wc{display:flex;align-items:center;gap:12px;width:calc(100% - 24px);margin:0 12px 9px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:transform .12s}
+.wc:active{transform:scale(.98)}
+.wc .ic{width:44px;height:44px;border-radius:12px;background:#e6efff;display:grid;place-items:center;font-size:23px;flex:none}
+.wc.w{border-color:var(--red);background:var(--redbg)}.wc.w .ic{background:var(--red)}
+.wc .m{flex:1;min-width:0}.wc .m b{font-size:14.5px;display:block}.wc .m span{font-size:12px;color:var(--mut)}
+.wc .v{font-size:19px;font-weight:600;color:var(--imd2);white-space:nowrap}
+:root[data-theme="dark"] .wc .v{color:#7db3ff}
+.rk{font-size:10.5px;color:var(--mut);display:block;text-align:right;font-weight:400}
+nav{display:flex;background:var(--card);border-top:1px solid var(--line)}
+nav button{flex:1;border:0;background:none;padding:8px 0 10px;font:inherit;font-size:11px;color:var(--mut);cursor:pointer}
+nav button i{display:block;font-style:normal;font-size:19px}nav button[aria-current=page]{color:var(--imd2);font-weight:600}
+#sheet{position:absolute;inset:0;background:var(--bg);transform:translateX(100%);transition:transform .22s;display:flex;flex-direction:column;z-index:5}
+#sheet.open{transform:none}
+.dbody{padding:14px;overflow-y:auto;flex:1}
+.big{display:flex;align-items:baseline;gap:8px}.big b{font-size:44px;font-weight:300;color:var(--imd2)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:12px;font-size:13px}
+.panel h3{font-size:12px;color:var(--mut);margin-bottom:8px}
+.kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}.kv:last-child{border:0}
+.sc{height:8px;background:var(--line);border-radius:5px;overflow:hidden;margin:4px 0 8px}.sc i{display:block;height:100%;background:var(--sf)}
+.tg{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.tg button{width:46px;height:26px;border-radius:14px;border:0;background:var(--line);position:relative;cursor:pointer}
+.tg button::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
+.tg button[aria-checked=true]{background:var(--ok)}.tg button[aria-checked=true]::after{left:23px}
+select{font:inherit;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+#onb{position:absolute;inset:0;background:var(--bg);z-index:9;display:none;flex-direction:column;overflow-y:auto}#onb.on{display:flex}#onb .go{margin:14px;padding:13px;border:0;border-radius:12px;background:var(--sf);color:#fff;font:inherit;font-weight:600;font-size:15px;cursor:pointer}.day{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}.day:last-child{border:0}.day b{width:44px}.day span:nth-child(3){flex:1;color:var(--mut);font-size:12px}.hs{display:flex;gap:8px;overflow-x:auto;padding:2px 0}.hs div{flex:none;text-align:center;font-size:11px;color:var(--mut);background:var(--bg);border-radius:10px;padding:8px 10px}.hs b{display:block;color:var(--ink);font-size:15px;margin:3px 0}.foot{font-size:10.5px;color:var(--mut);text-align:center;padding:8px 14px}
+</style></head><body>
+<div id="phone">
+ <div class="bar"><div class="logo"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="#f28c1e"/><g stroke="#0b3a82" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></g></svg></div>
+  <div><b>MAUSAM</b><small>India Meteorological Department · Personal</small></div><div class="sp"></div>
+  <button class="ib" id="th" aria-label="Toggle theme">◐</button></div>
+ <div class="stripe"></div>
+ <div id="scroll"></div>
+ <nav><button data-t="home" aria-current="page"><i>⌂</i>Home</button><button data-t="fc"><i>☁</i>Forecast</button><button data-t="warn"><i>⚠</i>Warnings</button><button data-t="demo"><i>👤</i>Profile</button></nav>
+ <div id="onb"></div>
+ <div id="sheet" role="dialog" aria-label="Card detail"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const S={tab:'home',persona:'Fitness',city:'Delhi',warn:false,off:false,mine:['Fitness','Commuter','Health'],onb:true};
+const CITY={Delhi:{t:31,f:36,h:68,w:14,u:8,aq:142,r:20,sun:'5:48',set:'18:12',v:'Haze'},Mumbai:{t:30,f:35,h:78,w:18,u:7,aq:96,r:45,sun:'6:20',set:'18:30',v:'Partly cloudy'},Guwahati:{t:27,f:31,h:84,w:8,u:6,aq:74,r:70,sun:'5:25',set:'17:35',v:'Light rain'}};
+const hrs=(b,d,n=12)=>Array.from({length:n},(_,i)=>Math.round(b+d*Math.sin((i-3)/n*Math.PI*1.6)));
+// [icon,title,value,subtitle,score,unit,series,rows,advice]
+const P={
+Fitness:[['🏃','Running suitability','Good','Best window 5:45–7:15 AM',92,'score',hrs(70,25),[['Temp','31°C'],['Humidity','68%'],['Wind','14 km/h'],['Rain chance','20%']],'Run before 7:30 AM. Heat and humidity climb fast after that; carry water.'],['☀','UV index','8 · Very high','Peak 11 AM – 3 PM',86,'UV',hrs(5,5),[['Now','8'],['Peak','10 at 1 PM'],['Burn time','~15 min']],'Use SPF 30+ and avoid midday outdoor sessions.'],['🌅','Sunrise & sunset','5:48 / 18:12','12h 24m daylight',78,'',hrs(20,10),[['Sunrise','5:48 AM'],['Sunset','6:12 PM'],['Golden hour','5:48–6:30 AM']],'Morning light is best for outdoor workouts.']],
+Commuter:[['🚗','Commute risk','Low','Dry roads, clear route',90,'risk',hrs(20,18),[['Rain','20%'],['Visibility','4 km'],['Wind','14 km/h']],'Leave as usual. Haze may slow highway traffic after 8 AM.'],['🌫','Visibility','4 km','Haze, improving by noon',82,'km',hrs(4,2),[['Now','4 km'],['9 AM','5 km'],['Noon','7 km']],'Use low beams on highways.'],['🌧','Evening rain','20%','Isolated showers possible',66,'%',hrs(20,25),[['5 PM','20%'],['8 PM','35%']],'Keep a light raincoat for the return trip.']],
+Health:[['😷','Air quality','AQI 142','Unhealthy for sensitive groups',95,'AQI',hrs(140,40),[['PM2.5','62 µg/m³'],['PM10','118 µg/m³'],['Category','Moderate–Unhealthy']],'Sensitive groups should limit long outdoor exertion; keep windows closed at noon.'],['☀','UV index','8 · Very high','Protect skin and eyes',84,'UV',hrs(5,5),[['Now','8'],['Peak','10']],'Sunglasses and sunscreen outdoors.'],['💧','Humidity','68%','Feels like 36°C',74,'%',hrs(65,12),[['Humidity','68%'],['Feels like','36°C']],'Hydrate often; avoid heavy exertion in the afternoon.']],
+Beach:[['🌊','Wave height','1.4 m','Moderate swell, NE',93,'m',hrs(14,6),[['Height','1.4 m'],['Period','8 s'],['Source','INCOIS (mock)']],'Surf is suitable for intermediate riders. Stay near lifeguards.'],['🌡','Sea temperature','29°C','Warm and comfortable',80,'°C',hrs(29,1),[['Surface','29°C']],'No wetsuit needed.'],['🌗','Tide','High 2:40 PM','Low 8:55 AM',76,'',hrs(10,8),[['High','2:40 PM · 1.9 m'],['Low','8:55 AM · 0.4 m']],'Swim at mid-tide; avoid low tide near rocks.']],
+Traveler:[['🧳','Packing for destination','Light & rain gear','Destination: Guwahati, 27°C',91,'',hrs(25,5),[['Temp','27°C'],['Rain','70%'],['Humidity','84%']],'Pack a compact umbrella, quick-dry clothes and sandals.'],['🗺','Activity prompt','Indoor first','Showers likely after 3 PM',79,'%',hrs(40,35),[['Morning','20%'],['Evening','70%']],'Plan sightseeing before noon.'],['✈','Flight weather','Clear','No delays expected',68,'',hrs(10,3),[['Departure','Clear'],['Arrival','Light rain']],'Allow extra time on arrival day.']],
+Family:[['🎒','School commute','Dry','Leave by 7:15 AM',92,'',hrs(10,8),[['Rain','10%'],['Temp','28°C'],['Visibility','5 km']],'Normal commute. Send water bottles.'],['☂','Rain today','20%','Light showers late evening',70,'%',hrs(15,18),[['Morning','5%'],['Evening','35%']],'Keep an umbrella in the bag.'],['⚠','Official warnings','None active','Heat watch for tomorrow',65,'',hrs(32,6),[['Tomorrow max','38°C']],'Plan outdoor play after 5 PM.']],
+Agriculture:[['🌾','Rainfall outlook','12 mm / 3 days','Below normal',90,'mm',hrs(3,5),[['Today','2 mm'],['Tomorrow','5 mm'],['Day 3','5 mm']],'Delay irrigation by a day if rain arrives tomorrow.'],['🌱','Soil moisture','Low (34%)','Top 10 cm layer',84,'%',hrs(34,4),[['Surface','34%'],['Root zone','48%']],'Schedule light irrigation early morning.'],['❄','Frost & season','No frost risk','Kharif advisory',60,'',hrs(25,4),[['Min temp','24°C']],'Seasonal advisory: follow local KVK guidance (mock).']],
+Event:[['🎪','Outdoor comfort index','Fair · 61','Warm and humid',89,'score',hrs(60,15),[['Temp','31°C'],['Humidity','68%'],['UV','8'],['Wind','14 km/h']],'Schedule outdoor events after 5 PM.'],['🌦','Rain probability','20%','Peak chance 8 PM',81,'%',hrs(20,22),[['6 PM','20%'],['8 PM','35%']],'Keep a covered backup area.'],['📅','7-day outlook','31–34°C','Mostly dry, one wet day',72,'°C',hrs(32,3,7),[['Sat','34°C'],['Sun','33°C · rain']],'Saturday is the best day.']],
+Gardening:[['🪴','Watering advice','Water at dusk','Hot and dry afternoon',88,'',hrs(30,6),[['Temp','31°C'],['Soil','34%'],['Rain','20%']],'Water after 6 PM to cut evaporation.'],['☀','Sun exposure','UV 8','Shade delicate plants 11–3',75,'UV',hrs(5,5),[['UV','8']],'Use shade cloth on seedlings.'],['💨','Wind','14 km/h','Gusts to 25 km/h',62,'km/h',hrs(12,6),[['Gust','25 km/h']],'Stake tall plants.']]
+};
+const WARN=['⛈','Thunderstorm & lightning warning','Orange alert','IMD warning · valid till 9 PM',100,'',hrs(30,10),[['Issued by','IMD (mock)'],['Severity','Orange'],['Valid till','9:00 PM']],'Stay indoors, avoid open areas and unplug electronics. Official warnings always rank first.'];
+function cards(){let c=P[S.persona].map((x,i)=>({x,i}));c.sort((a,b)=>b.x[4]-a.x[4]);return c.map(o=>o.x)}
+function unit(x,n){return n}
+function render(){
+ const sc=$('#scroll');const d=CITY[S.city];let h='';
+ if(S.tab==='home'){
+  if(S.off)h+=`<div class="banner off">📴 Offline. Showing cached data from 6:42 AM. Not live.</div>`;
+  if(S.warn)h+=`<div style="padding:10px 12px 0"><button class="banner warn" style="margin:0;width:100%" data-w="1">⛈ Orange alert: thunderstorm in ${S.city}. Tap for details.</button></div>`;
+  h+=`<div class="hero"><div class="t"><div><div class="loc">📍 ${S.city}</div><h1>${d.t}°</h1><p>${d.v} · Feels like ${d.f}°C</p></div><div style="font-size:48px">${d.r>50?'🌧':d.r>30?'⛅':'🌤'}</div></div><div class="row4"><span><b>${d.h}%</b>Humidity</span><span><b>${d.w}</b>km/h</span><span><b>${d.u}</b>UV</span><span><b>${d.aq}</b>AQI</span></div></div>`;
+  h+=`<div class="chips" role="group" aria-label="Persona">${S.mine.map(p=>`<button class="chip" aria-pressed="${p===S.persona}" data-p="${p}">${p}</button>`).join('')}</div><h2>Ranked for you · ${S.persona}</h2>`;
+  const list=(S.warn?[WARN]:[]).concat(cards());
+  h+=list.map((x,i)=>`<button class="wc ${x===WARN?'w':''}" data-c="${x===WARN?'w':P[S.persona].indexOf(x)}"><div class="ic">${x[0]}</div><div class="m"><b>${x[1]}</b><span>${x[3]}</span></div><div><div class="v" ${x===WARN?'style="color:#c62828"':''}>${x[2].split(' · ')[0]}</div><span class="rk">#${i+1} · ${x[4]}</span></div></button>`).join('');
+  h+=`<div class="foot">Prototype with mock data. Not an official IMD product.</div>`;
+ }else if(S.tab==='fc'){
+  const ic=r=>r>50?'🌧':r>30?'⛅':'☀',days=['Today','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const hr=hrs(d.t-2,5,8);
+  h+=`<div class="panel" style="margin:12px"><h3>${S.city} · next 8 hours</h3><div class="hs">${hr.map((t,i)=>`<div>${(i*2+7)%24}:00<b>${t}°</b>${ic(d.r+(i%3)*8)}</div>`).join('')}</div></div>`;
+  h+=`<div class="panel" style="margin:12px"><h3>7-day forecast</h3>${days.map((n,i)=>{const r=Math.max(5,Math.min(90,d.r+[0,10,-5,20,-10,25,5][i]));return `<div class="day"><b>${n}</b><span>${ic(r)}</span><span>${r}% rain</span><b style="width:auto">${d.t+[0,1,2,0,-1,2,1][i]+3}° / ${d.t-8+[0,0,1,-1,-1,0,1][i]}°</b></div>`}).join('')}</div>`;
+  h+=`<div class="panel" style="margin:12px"><h3>Radar (mock)</h3><svg viewBox="0 0 100 50" width="100%"><rect width="100" height="50" rx="4" fill="#cfe0f5"/><ellipse cx="30" cy="22" rx="16" ry="9" fill="#3aa0ff" opacity=".55"/><ellipse cx="34" cy="24" rx="7" ry="4" fill="#1b8a4b" opacity=".7"/><ellipse cx="68" cy="30" rx="12" ry="7" fill="#f2c21e" opacity=".6"/>${S.warn?'<ellipse cx="68" cy="30" rx="5" ry="3" fill="#c62828" opacity=".8"/>':''}<circle cx="50" cy="25" r="1.5" fill="#0b3a82"/></svg></div><div class="foot">Prototype with mock data.</div>`;
+ }else if(S.tab==='warn'){
+  h+=`<h2 style="margin-top:14px">Active warnings · ${S.city}</h2>`;
+  h+=S.warn?`<button class="wc w" data-c="w"><div class="ic">${WARN[0]}</div><div class="m"><b>${WARN[1]}</b><span>${WARN[3]}</span></div><div class="v" style="color:#c62828">Orange</div></button>`:`<div class="panel" style="margin:12px">No active warnings. Turn on “Simulate severe warning” in Demo to see how it jumps to #1 on every persona.</div>`;
+ }else{
+  h+=`<div class="panel" style="margin:12px"><h3>My personas</h3><div class="chips" style="padding:0 0 8px;flex-wrap:wrap">${Object.keys(P).map(p=>`<button class="chip" aria-pressed="${S.mine.includes(p)}" data-m="${p}">${p}</button>`).join('')}</div><h3>Demo controls</h3><div class="tg">Simulate severe warning<button role="switch" aria-checked="${S.warn}" data-s="warn" aria-label="Severe warning"></button></div><div class="tg">Offline mode<button role="switch" aria-checked="${S.off}" data-s="off" aria-label="Offline"></button></div><div class="tg">City<select id="city">${Object.keys(CITY).map(c=>`<option ${c===S.city?'selected':''}>${c}</option>`).join('')}</select></div></div><div class="panel" style="margin:12px"><h3>How ranking works</h3>Score = 0.40 Persona + 0.20 Time + 0.15 Location + 0.15 Weather + 0.10 Preference. Official severe warnings override everything and take #1.</div>`;
+ }
+ sc.innerHTML=h;
+}
+function chart(a,color){const m=Math.max(...a,1),w=100/a.length;return `<svg viewBox="0 0 100 40" width="100%" height="90" preserveAspectRatio="none">${a.map((v,i)=>`<rect x="${i*w+w*.15}" y="${40-v/m*36}" width="${w*.7}" height="${v/m*36}" rx="1.5" fill="${color}"/>`).join('')}</svg>`}
+function open(k){
+ const x=k==='w'?WARN:P[S.persona][k];const isW=k==='w';
+ $('#sheet').innerHTML=`<div class="bar" style="background:${isW?'#c62828':'var(--imd)'}"><button class="ib" id="bk" aria-label="Back">←</button><b style="font-size:16px">${x[1]}</b></div><div class="dbody"><div class="big"><span style="font-size:34px">${x[0]}</span><b style="font-size:30px">${x[2]}</b></div><p style="color:var(--mut);font-size:13px;margin-top:4px">${x[3]}</p>
+ <div class="panel"><h3>Next 12 hours</h3>${chart(x[6],isW?'#c62828':'#2a7be0')}<div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--mut)"><span>Now</span><span>+6h</span><span>+12h</span></div></div>
+ <div class="panel"><h3>Details</h3>${x[7].map(r=>`<div class="kv"><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}</div>
+ <div class="panel"><h3>What to do</h3>${x[8]}</div>
+ <div class="panel"><h3>Why this card is here</h3>Relevance ${x[4]}/100 for ${S.persona}<div class="sc"><i style="width:${x[4]}%"></i></div>${isW?'Official severe warning: priority MAX.':'Ranked by persona, time of day, location and live weather.'}${S.off?'<br><b>Cached data. Not live.</b>':''}</div></div>`;
+ $('#sheet').classList.add('open');$('#bk').focus();$('#bk').onclick=()=>$('#sheet').classList.remove('open');
+}
+$('#scroll').addEventListener('click',e=>{const b=e.target.closest('button,select');if(!b)return;
+ if(b.dataset.p){S.persona=b.dataset.p;render()}
+ else if(b.dataset.m){const m=b.dataset.m,i=S.mine.indexOf(m);if(i>-1&&S.mine.length>1)S.mine.splice(i,1);else if(i<0)S.mine.push(m);if(!S.mine.includes(S.persona))S.persona=S.mine[0];render()}
+ else if(b.dataset.c!==undefined)open(b.dataset.c)
+ else if(b.dataset.w)open('w')
+ else if(b.dataset.s){S[b.dataset.s]=!S[b.dataset.s];render()}});
+$('#scroll').addEventListener('change',e=>{if(e.target.id==='city'){S.city=e.target.value;render()}});
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;document.querySelectorAll('nav button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','page');$('#sheet').classList.remove('open');render()});
+$('#th').onclick=()=>{const r=document.documentElement;const dk=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark'};
+function onb(){const o=$('#onb');o.classList.add('on');
+ o.innerHTML=`<div class="bar"><b>Welcome to MAUSAM</b></div><div class="stripe"></div><div class="dbody"><h2 style="margin:0 0 6px;font-size:15px;color:var(--ink)">Who are you checking weather for?</h2><p style="font-size:12.5px;color:var(--mut)">Pick one or more. You can change this later in Profile.</p><div class="chips" style="flex-wrap:wrap;padding:12px 0">${Object.keys(P).map(p=>`<button class="chip" aria-pressed="${S.mine.includes(p)}" data-m="${p}">${p}</button>`).join('')}</div><h2 style="margin:8px 0;font-size:15px;color:var(--ink)">Home location</h2><select id="oc" style="width:100%;padding:10px">${Object.keys(CITY).map(c=>`<option>${c}</option>`).join('')}</select></div><button class="go" id="go">Start</button>`;
+ o.onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;const m=b.dataset.m,i=S.mine.indexOf(m);if(i>-1&&S.mine.length>1)S.mine.splice(i,1);else if(i<0)S.mine.push(m);b.setAttribute('aria-pressed',S.mine.includes(m))};
+ $('#go').onclick=()=>{S.city=$('#oc').value;S.persona=S.mine[0];o.classList.remove('on');render()}}
+render();onb();
+</script></body></html>
